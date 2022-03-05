@@ -1,7 +1,11 @@
 part of 'frases_bloc.dart';
 
-@immutable
-abstract class FrasesState {}
+abstract class FrasesState extends Equatable {
+  const FrasesState();
+
+  @override
+  List<Object> get props => [];
+}
 
 class FrasesInitial extends FrasesState {}
 
@@ -11,9 +15,29 @@ class FrasesLoadingState extends FrasesState {}
 
 class FrasesUpdatedState extends FrasesState {
   final Map frase;
-  final Map imagen;
-  final Map hora;
-  final Map paises;
+  final String imagen;
 
-  List<Object> get props => [decodedResult];
+  FrasesUpdatedState(this.frase, this.imagen);
+
+  List<Object> get props => [frase, imagen];
+}
+
+class FrasesErrorState extends FrasesState {
+  final String error;
+
+  FrasesErrorState(this.error);
+
+  List<Object> get props => [error];
+}
+
+class FrasesCountriesLoadingState extends FrasesState {}
+
+class FrasesCountriesUpdatedState extends FrasesState {
+  final Map<String, String> tzToCountries;
+  final Map<String, String> flagsDirs;
+  final String hora;
+
+  FrasesCountriesUpdatedState(this.tzToCountries, this.flagsDirs, this.hora);
+
+  List<Object> get props => [tzToCountries, flagsDirs, hora];
 }

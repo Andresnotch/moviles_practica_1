@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practica_1/bloc/frases_bloc.dart';
 import 'package:practica_1/homepage.dart';
 
 void main() => runApp(MyApp());
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
             selectionHandleColor: Colors.purple),
         appBarTheme: const AppBarTheme(color: Colors.purple),
       ),
-      home: HomePage(),
+      home: BlocProvider<FrasesBloc>(
+        create: (context) => FrasesBloc(),
+        child: HomePage(),
+      ),
     );
   }
 }
